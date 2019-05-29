@@ -14,7 +14,6 @@ Graph measures :
                 - Resilience -Done but TODO (not sure how to do degree distribution) Can make a graph. Is that enough?
                 - Characteristics Path  length (Average shortest path length) - Done
                 - Quasi Idempotence - TODO
-                - Community delts - TODO
                 - Measure of network small wordness. - Done
                 - Fiedel value - DONE
                 - Randic index (a=1 , assortativity coefficient of graph) - DONE
@@ -163,13 +162,14 @@ def modularity(graph):
     :return: list of modularity
 
     NOT MAKE SENSE FOR THE GRAPH SO FAR. (To ask) Can count the communities. Will it make sense?
+    Now given all the modules, find the modularity.
 
     """
     comm= nx.algorithms.community.asyn_lpa_communities(graph,weight='weight')
     for i in comm:
         print(i)
     print('HOLLA')
-    for j in  nx.algorithms.community.asyn_fluidc(G,k=15):
+    for j in  nx.algorithms.community.asyn_fluidc(graph,k=15):
         print(j)
 
 
@@ -223,6 +223,8 @@ def degree_distribution(graph):
     :param graph: weighted undirected graph
     :return: return histogram
     Not know how to use it.
+
+    ALREADY HAVE PDF, FIND CDF.
 
     """
     degree_sequence = sorted([d for n, d in graph.degree()], reverse=True)
@@ -291,7 +293,11 @@ if __name__ == '__main__':
     length_matrix=data_import(file_len,'DTI_LEN')
     graph_weight = convert_matrix_to_graph(adjacency)
     graph_len = convert_matrix_to_graph(length_matrix)
-    degree_distribution(graph_weight)
+    #degree_distribution(graph_weight)
     #print(G.get_edge_data(*(2,1)))
     #print(small_wordness_sigma(G))
     #print(betweeness_centrality(graph_weight))
+    #modularity(graph_weight)
+    a=nx.modularity_matrix(graph_weight,weight='weight')
+    print(type(a))
+    np.savetxt('modularity.csv',a,delimiter=',') #use this modularity to use modularity
