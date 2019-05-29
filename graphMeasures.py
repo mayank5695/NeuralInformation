@@ -4,42 +4,48 @@
 Graph measures for different parcellation schemes
 Graph measures :
                 -Degree -DONE
-                -Shortest path length - TODO
+                - Density - DONE
                 -Number of Triangles -DONE
                 -Global Efficiency -DONE
                 - Transitivity -DONE
                 - Modularity-DONE
+                - Clustering Coefficient - Done
                 - Navigation(from sites.google.com link) -TODO
-                - Resilience -TODO
-                - Characteristics Path  length (Average shortest path length) -TODO
+                - Resilience -Done but TODO (not sure how to do degree distribution) Can make a graph. Is that enough?
+                - Characteristics Path  length (Average shortest path length) - Done
                 - Quasi Idempotence - TODO
-                - Community delts
-                - Measure of network small wordness.
-                - Fiedel value -DONE
-                - Randic index (a=1 , assortativity coefficient of graph) -DONE
+                - Community delts - TODO
+                - Measure of network small wordness. - Done
+                - Fiedel value - DONE
+                - Randic index (a=1 , assortativity coefficient of graph) - DONE
+                - Eigen vector centrality - Done
+                - Edge between centrality - Done
+                - Betweeness Centrality - Done
 
 
 """
-
+import collections
 import h5py
 import numpy as np
 import networkx as nx
 import matplotlib.pyplot as plt
+import math
 import community
 file = 'SC_matrices/100307/aal90/DTI_CM.mat'
 file_len='SC_matrices/100307/aal90/DTI_LEN.mat'
 
-def data_import(data):
+def data_import(data,name):
     """
 
     :param data: The file .mat file which contains association matrix between nodes of each parcellation scheme
     :return: The numpy array of .mat file
     """
+
     array = {}
     data = h5py.File(data)
     for k, v in data.items():
         array[k] = np.array(v)
-    array = array['DTI_CM']
+    array = array[name]
 
     for i in range(0,array.shape[0]):
         array[i][i]=0
@@ -81,16 +87,17 @@ def get_degree(Graph):
         degree.append(Graph.degree[i])
     return degree
 
-def get_shortest_path_length(graph):
+def get_density(graph):
     """
-    TODO
-    :param graph: undirected weighted graph
-    :return:
-    """
-    if (nx.is_connected(G)):
-        len_path = dict(nx.all_pairs_dijkstra(graph))
-    print(len_path)
+    The density for undirected graphs is
 
+        𝑑=2𝑚/𝑛(𝑛−1),
+    The density is 0 for a graph without edges and 1 for a complete graph.
+
+    :param graph: undirected weighted graph
+    :return: density
+    """
+    return nx.density(graph)
 
 def number_triangles(graph):
     """
@@ -165,6 +172,21 @@ def modularity(graph):
     for j in  nx.algorithms.community.asyn_fluidc(G,k=15):
         print(j)
 
+
+def clustering_coefficient(graph):
+    """
+    This function finds an approximate average clustering coefficient for G by repeating n times (defined in trials)
+    the following experiment: choose a node at random, choose two of its neighbors at random, and check
+    if they are connected.
+    The approximate coefficient is the fraction of triangles found over the number of trials which
+    in this case is 1000 as default.
+
+    :param graph: undirected weighted graph
+    :return: average clustering coefficient
+
+    """
+    return nx.algorithms.average_clustering(graph)
+
 def fiedler_value(graph):
     """
     The Fiedler value, or algebraic connectivity, was introduced by Fiedler in 1973 and
@@ -189,16 +211,87 @@ def small_wordness_sigma(graph):
     A graph is commonly classified as small-world if sigma>1.
 
     :param graph: undirected graph
-    :return: sigma value
+    :return: None
 
     """
-    return nx.algorithms.sigma(graph)
+    return nx.algorithms.sigma(graph,niter=2, nrand=2)
+
+def degree_distribution(graph):
+    """
+    Create a histogram of degree distribution
+
+    :param graph: weighted undirected graph
+    :return: return histogram
+    Not know how to use it.
+
+    """
+    degree_sequence = sorted([d for n, d in graph.degree()], reverse=True)
+    degreeCount = collections.Counter(degree_sequence)
+    deg, cnt = zip(*degreeCount.items())
+
+    fig, ax = plt.subplots()
+    plt.bar(deg, cnt, width=0.80, color='b')
+
+    plt.title("Degree Histogram")
+    plt.ylabel("Count")
+    plt.xlabel("Degree")
+    ax.set_xticks([d + 0.4 for d in deg])
+    ax.set_xticklabels(deg)
+
+    # draw graph in inset
+    plt.axes([0.4, 0.4, 0.5, 0.5])
+    Gcc = sorted(nx.connected_component_subgraphs(graph), key=len, reverse=True)[0]
+    pos = nx.spring_layout(graph)
+    plt.axis('off')
+    nx.draw_networkx_nodes(graph, pos, node_size=20)
+    nx.draw_networkx_edges(graph, pos, alpha=0.4)
+
+    plt.show()
+
+def characteristic_path_length(graph):
+    """
+    Average shortest path length in a graph. The weight here is treated as the length of the graph.
+
+    :param graph: adjcency matrix with length as weights.
+    :return: average shortest path
+    """
+    return nx.average_shortest_path_length(graph,weight='weight')
+
+def eigen_vector_centrality(graph):
+    """
+    Compute the eigenvector centrality for the graph G.
+
+    Eigenvector centrality computes the centrality for a node based on the centrality of its neighbors.
+    :param graph: undirected weighted graph
+    :return: dictionary of eigen vector centrality for each node.
+    """
+    return nx.eigenvector_centrality_numpy(graph,weight='weight')
+
+def edge_betweeness_centrality(graph):
+    """
+
+    :param graph:
+    :return: dictionary
+    """
+
+    return nx.edge_betweenness_centrality(graph,k=math.floor(math.sqrt(len(graph.nodes))),weight='weight')
+
+def betweeness_centrality(graph):
+    """
+    Use brandes algorithm
+
+    :param graph:
+    :return:
+    """
+    return nx.betweenness_centrality(graph,k=math.floor(math.sqrt(len(graph.nodes))),weight='weight')
 
 if __name__ == '__main__':
 
-    adjacency = data_import(file)
-    #length_matrix=data_import(file_len)
-    G = convert_matrix_to_graph(adjacency)
+    adjacency = data_import(file,'DTI_CM')
+    length_matrix=data_import(file_len,'DTI_LEN')
+    graph_weight = convert_matrix_to_graph(adjacency)
+    graph_len = convert_matrix_to_graph(length_matrix)
+    degree_distribution(graph_weight)
     #print(G.get_edge_data(*(2,1)))
-    print(small_wordness_sigma(G))
-
+    #print(small_wordness_sigma(G))
+    #print(betweeness_centrality(graph_weight))
