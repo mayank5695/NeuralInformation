@@ -1,0 +1,12 @@
+1 Right_M1
+2 Left_M1
+3 Right_S1
+4 Left_S1
+5 Right_SMA
+6 Left_SMA
+7 Right_preSMA
+8 Left_preSMA
+9 Right_PMd
+10 Left_PMd
+11 Right_PMv
+12 Left_PMv
