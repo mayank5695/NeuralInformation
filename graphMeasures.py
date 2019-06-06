@@ -8,12 +8,12 @@ Graph measures :
                 -Number of Triangles -DONE
                 -Global Efficiency -DONE
                 - Transitivity -DONE
-                - Modularity-DONE
+                - Modularity-DONE, Updated, TODO again.
                 - Clustering Coefficient - Done
                 - Navigation(from sites.google.com link) -TODO
                 - Resilience -Done but TODO (not sure how to do degree distribution) Can make a graph. Is that enough?
                 - Characteristics Path  length (Average shortest path length) - Done
-                - Quasi Idempotence - TODO
+                - Quasi Idempotence - TODO Still needed
                 - Measure of network small wordness. - Done
                 - Fiedel value - DONE
                 - Randic index (a=1 , assortativity coefficient of graph) - DONE
@@ -30,8 +30,6 @@ import networkx as nx
 import matplotlib.pyplot as plt
 import math
 import community
-file = 'SC_matrices/100307/aal90/DTI_CM.mat'
-file_len='SC_matrices/100307/aal90/DTI_LEN.mat'
 
 def data_import(data,name):
     """
@@ -153,7 +151,7 @@ def assortativity(graph):
     :param graph: undirected weighted graph
     :return: degree assortativity and peasrson assortativitity of graph
     """
-    return (nx.degree_assortativity_coefficient(graph, weight='weight'), nx.degree_pearson_correlation_coefficient(graph,weight='weight'))
+    return (nx.degree_assortativity_coefficient(graph, weight='weight'))
 
 def modularity(graph):
     """
@@ -162,15 +160,11 @@ def modularity(graph):
     :return: list of modularity
 
     NOT MAKE SENSE FOR THE GRAPH SO FAR. (To ask) Can count the communities. Will it make sense?
-    Now given all the modules, find the modularity.
+    Now given all the modules, find the modularity. TODO
 
     """
-    comm= nx.algorithms.community.asyn_lpa_communities(graph,weight='weight')
-    for i in comm:
-        print(i)
-    print('HOLLA')
-    for j in  nx.algorithms.community.asyn_fluidc(graph,k=15):
-        print(j)
+    modularity_matrix = nx.modularity_matrix(graph_weight, weight='weight')
+
 
 
 def clustering_coefficient(graph):
@@ -214,7 +208,7 @@ def small_wordness_sigma(graph):
     :return: None
 
     """
-    return nx.algorithms.sigma(graph,niter=2, nrand=2)
+    return nx.algorithms.sigma(graph)
 
 def degree_distribution(graph):
     """
@@ -287,17 +281,33 @@ def betweeness_centrality(graph):
     """
     return nx.betweenness_centrality(graph,k=math.floor(math.sqrt(len(graph.nodes))),weight='weight')
 
-if __name__ == '__main__':
 
-    adjacency = data_import(file,'DTI_CM')
-    length_matrix=data_import(file_len,'DTI_LEN')
+
+def graph_function_calling(adjacency_file,length_file):
+
+    adjacency = data_import(adjacency_file,'DTI_CM')
+    np.savetxt('adj.csv',adjacency,delimiter=',')
+    length_matrix=data_import(length_file,'DTI_LEN')
     graph_weight = convert_matrix_to_graph(adjacency)
     graph_len = convert_matrix_to_graph(length_matrix)
-    #degree_distribution(graph_weight)
-    #print(G.get_edge_data(*(2,1)))
-    #print(small_wordness_sigma(G))
-    #print(betweeness_centrality(graph_weight))
-    #modularity(graph_weight)
-    a=nx.modularity_matrix(graph_weight,weight='weight')
-    print(type(a))
-    np.savetxt('modularity.csv',a,delimiter=',') #use this modularity to use modularity
+
+
+    #ONE VALUE FOR EACH NODE
+    degree_per_node=get_degree(graph_weight)
+    triangle_per_node = number_triangles(graph_weight)
+
+    #ONE VALUE FOR GRAPH
+
+    density=get_density(graph_weight)
+    average_global_efficiency=global_efficiency_graph(graph_weight)
+    transitivity_graph=transitivity(graph_weight)
+    degree_assortavity=assortativity(graph_weight)
+    average_clustering=clustering_coefficient(graph_weight)
+    fiedler_graph=fiedler_value(graph_weight)
+    #smallWorldness=small_wordness_sigma(graph_weight) #takes a lot of time, computation cost high
+    smallWorldness=0
+    average_path_length=characteristic_path_length(graph_len)
+
+    value_lst=[density,average_global_efficiency,transitivity_graph,degree_assortavity,average_clustering,fiedler_graph,smallWorldness,average_path_length] #please do not interchange
+
+    return value_lst
