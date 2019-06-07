@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
-import matplotlib.patches as mpatches
-
+import scipy
+import statistics
 def adjacent_placed_nodes(matrix):
     """
     The matrix is written in form :
@@ -41,10 +41,7 @@ def create_graph(matrix,name):
     left=matrix[:,0]
     right=matrix[:,1]
     sum=matrix[:,2]
-    if(name=='AAL' or name=='AAL_length' or name=='Schaefer_length'):
-        x_value=np.arange(1,40,1)
-    else:
-        x_value=np.arange(1,41,1)
+    x_value=np.arange(1,41,1)
     plt.plot(x_value, left, 'rs--',label='left hem.')
     plt.plot(x_value, right, 'bs--',label='right hem.')
     plt.plot(x_value, sum, 'g^--',label='total')
@@ -56,4 +53,18 @@ def create_graph(matrix,name):
     name=name+'.png'
     plt.savefig(name,bbox_inches='tight')
     plt.clf()
+
+
+def statistics_check(matrix,patient,name):
+    matrix=np.array(matrix)
+    sum=matrix[:,2]
+    standard_dev=np.std(sum,ddof=1)
+    mean=np.mean(sum)
+    patient_out={}
+    for i in range(0,sum.shape[0]):
+        if(sum[i]<(mean-3*standard_dev) or sum[i]>(mean+3*standard_dev)):
+            patient_out.update({name:{patient[i],sum[i]}})
+    statistics={name:{standard_dev,mean}}
+    return (statistics,patient_out)
+
 

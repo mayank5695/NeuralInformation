@@ -2,8 +2,9 @@
 TO extract values for all the classes
 """
 from graphMeasures import data_import
-from parcellationCheck import cluster_placed_nodes,adjacent_placed_nodes,create_graph
+from parcellationCheck import cluster_placed_nodes,adjacent_placed_nodes,create_graph,statistics_check
 import pandas as pd
+import json
 import sys
 import os
 import glob
@@ -119,18 +120,145 @@ for dir in glob.iglob(path_patients,recursive=True):
                         matrix_values = cluster_placed_nodes(matrix_adj)  # gives (left,right,sum)
                         schaefer_len.append(matrix_values)
 
+name=['aal','harvard','mindboggle','schaefer','aicha','brainnetome']
+len='_len'
+
+#
+# create_graph(aal,'AAL')
+# create_graph(aal_len,'AAL_length')
+# create_graph(harvard,'Harvard')
+# create_graph(harvard_len,'Harvard_length')
+# create_graph(mindboggle,'Mindboggle')
+# create_graph(mindboggle_len,'Mindboggle_length')
+# create_graph(schaefer_len,'Schaefer_length')
+# create_graph(schaefer,'Schaefer')
+# create_graph(aicha,'Aicha')
+# create_graph(aicha_len,'Aicha_length')
+# create_graph(brainnetome,'Brainnatome')
+# create_graph(brainnetome_len,'Brainnatome_length')
+
+patients_outlier={}
+statistics={}
+
+#AAL statistics
+data=statistics_check(aal,patients,name[0])
+statistics.update(data[0])
+patients_outlier.update(data[1])
+
+data=statistics_check(aal_len,patients,(name[0]+len))
+statistics.update(data[0])
+patients_outlier.update(data[1])
+
+#harvard statistics
+data=statistics_check(harvard,patients,name[1])
+statistics.update(data[0])
+patients_outlier.update(data[1])
+
+data=statistics_check(harvard_len,patients,(name[1]+len))
+statistics.update(data[0])
+patients_outlier.update(data[1])
+
+#mindboggle
+data=statistics_check(mindboggle,patients,name[2])
+statistics.update(data[0])
+patients_outlier.update(data[1])
+
+data=statistics_check(mindboggle_len,patients,(name[2]+len))
+statistics.update(data[0])
+patients_outlier.update(data[1])
+
+#Schaefer
 
 
-create_graph(aal,'AAL')
-create_graph(aal_len,'AAL_length')
-create_graph(harvard,'Harvard')
-create_graph(harvard_len,'Harvard_length')
-create_graph(mindboggle,'Mindboggle')
-create_graph(mindboggle_len,'Mindboggle_length')
-create_graph(schaefer_len,'Schaefer_length')
-create_graph(schaefer,'Schaefer')
-create_graph(aicha,'Aicha')
-create_graph(aicha_len,'Aicha_length')
-create_graph(brainnetome,'Brainnatome')
-create_graph(brainnetome_len,'Brainnatome_length')
+data=statistics_check(schaefer,patients,name[3])
+statistics.update(data[0])
+patients_outlier.update(data[1])
 
+data=statistics_check(schaefer_len,patients,(name[3]+len))
+statistics.update(data[0])
+patients_outlier.update(data[1])
+
+#aicha
+
+
+data=statistics_check(aicha,patients,name[5])
+statistics.update(data[0])
+patients_outlier.update(data[1])
+
+data=statistics_check(aicha_len,patients,(name[4]+len))
+statistics.update(data[0])
+patients_outlier.update(data[1])
+
+#brainnetome
+
+
+data=statistics_check(brainnetome,patients,name[5])
+statistics.update(data[0])
+patients_outlier.update(data[1])
+
+data=statistics_check(brainnetome_len,patients,(name[5]+len))
+statistics.update(data[0])
+patients_outlier.update(data[1])
+
+#Saving the data now
+f = open("data/statistics.json","w")
+f.write(str(statistics))
+f.close()
+
+f = open("data/patients_outliers.json","w")
+f.write(str(patients_outlier))
+f.close()
+
+
+#SAVING PARCELLATION DATA
+pat=pd.Series(patients)
+column=['left','right','total']
+dat='data/'
+
+df=pd.DataFrame(aal,columns=column)
+df['patients']=pat.values
+df.to_csv(dat+name[0]+'.csv',index=False)
+
+df=pd.DataFrame(aal_len,columns=column)
+df['patients']=pat.values
+df.to_csv(dat+name[0]+len+'.csv',index=False)
+
+df = pd.DataFrame(harvard, columns=column)
+df['patients'] = pat.values
+df.to_csv(dat + name[1] + '.csv', index=False)
+
+df = pd.DataFrame(harvard_len, columns=column)
+df['patients'] = pat.values
+df.to_csv(dat + name[1] + len + '.csv', index=False)
+
+df = pd.DataFrame(mindboggle, columns=column)
+df['patients'] = pat.values
+df.to_csv(dat + name[2] + '.csv', index=False)
+
+df = pd.DataFrame(mindboggle_len, columns=column)
+df['patients'] = pat.values
+df.to_csv(dat + name[2] + len + '.csv', index=False)
+
+df = pd.DataFrame(schaefer, columns=column)
+df['patients'] = pat.values
+df.to_csv(dat + name[3] + '.csv', index=False)
+
+df = pd.DataFrame(schaefer_len, columns=column)
+df['patients'] = pat.values
+df.to_csv(dat + name[3] + len + '.csv', index=False)
+
+df = pd.DataFrame(aicha, columns=column)
+df['patients'] = pat.values
+df.to_csv(dat + name[4] + '.csv', index=False)
+
+df = pd.DataFrame(aicha_len, columns=column)
+df['patients'] = pat.values
+df.to_csv(dat + name[4] + len + '.csv', index=False)
+
+df = pd.DataFrame(brainnetome, columns=column)
+df['patients'] = pat.values
+df.to_csv(dat + name[5] + '.csv', index=False)
+
+df = pd.DataFrame(brainnetome_len, columns=column)
+df['patients'] = pat.values
+df.to_csv(dat + name[5] + len + '.csv', index=False)
