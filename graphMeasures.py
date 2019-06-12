@@ -316,4 +316,4 @@ def graph_function_length(length_file):
     length_matrix = data_import(length_file, 'DTI_LEN')
     graph_len = convert_matrix_to_graph(length_matrix)
     average_path_length=characteristic_path_length(graph_len)
-    return average_path_length
+    return [average_path_length]
