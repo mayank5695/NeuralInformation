@@ -48,7 +48,7 @@ def iterate():
                             matrix_values = graph_function_length(file)  # gives (left,right,sum)
                             aal_len.append(matrix_values)
 
-                    Harvard parcellation
+                    #Harvard parcellation
                     if (parcel == parcellations[1]):
                         if (file_name == 'DTI_CM.mat'):
                             matrix_values = graph_function_calling(file)  # gives (left,right,sum)
