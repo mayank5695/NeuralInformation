@@ -80,9 +80,12 @@ def get_degree(Graph):
     :return: degreee of each node of the graph
     """
     degree = []
+    avg_degree=0
     for i in range(0, len(Graph.nodes)):
         degree.append(Graph.degree[i])
-    return degree
+        avg_degree+=Graph.degree[i]
+    avg_degree=avg_degree/len(Graph.nodes)
+    return avg_degree
 
 def get_density(graph):
     """
@@ -251,7 +254,10 @@ def characteristic_path_length(graph):
     :param graph: adjcency matrix with length as weights.
     :return: average shortest path
     """
-    return nx.average_shortest_path_length(graph,weight='weight')
+    if(nx.is_connected(graph)):
+        return nx.average_shortest_path_length(graph,weight='weight')
+    else:
+        return -1
 
 def eigen_vector_centrality(graph):
     """
@@ -283,17 +289,14 @@ def betweeness_centrality(graph):
 
 
 
-def graph_function_calling(adjacency_file,length_file):
+def graph_function_calling(adjacency_file):
 
     adjacency = data_import(adjacency_file,'DTI_CM')
-    np.savetxt('adj.csv',adjacency,delimiter=',')
-    length_matrix=data_import(length_file,'DTI_LEN')
     graph_weight = convert_matrix_to_graph(adjacency)
-    graph_len = convert_matrix_to_graph(length_matrix)
 
 
     #ONE VALUE FOR EACH NODE
-    degree_per_node=get_degree(graph_weight)
+    degree=get_degree(graph_weight)
     triangle_per_node = number_triangles(graph_weight)
 
     #ONE VALUE FOR GRAPH
@@ -305,9 +308,14 @@ def graph_function_calling(adjacency_file,length_file):
     average_clustering=clustering_coefficient(graph_weight)
     fiedler_graph=fiedler_value(graph_weight)
     #smallWorldness=small_wordness_sigma(graph_weight) #takes a lot of time, computation cost high
-    smallWorldness=0
-    average_path_length=characteristic_path_length(graph_len)
+    smallWorldness=small_wordness_sigma(graph_weight)
 
-    value_lst=[density,average_global_efficiency,transitivity_graph,degree_assortavity,average_clustering,fiedler_graph,smallWorldness,average_path_length] #please do not interchange
+    value_lst=[degree,density,average_global_efficiency,transitivity_graph,degree_assortavity,average_clustering,fiedler_graph,smallWorldness] #please do not interchange
 
     return value_lst
+
+def graph_function_length(length_file):
+    length_matrix = data_import(length_file, 'DTI_LEN')
+    graph_len = convert_matrix_to_graph(length_matrix)
+    average_path_length=characteristic_path_length(graph_len)
+    return average_path_length
