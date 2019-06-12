@@ -24,89 +24,77 @@ brainnetome_len=[]
 aicha_len=[]
 schaefer_len=[]
 
-for dir in glob.iglob(path_patients,recursive=True):
-    if os.path.isdir(dir):
-        dir2=dir+'/*'
-        patient=dir.strip(path_patients)
-        patients.append(patient)
+def iterate():
+    for dir in glob.iglob(path_patients,recursive=True):
+        if os.path.isdir(dir):
+            dir2=dir+'/*'
+            patient=dir.strip(path_patients)
+            patients.append(patient)
 
-        for subdir in glob.iglob(dir2,recursive=True):
+            for subdir in glob.iglob(dir2,recursive=True):
 
-            parcel=subdir[len(dir)+1:]
-            subdir2=subdir+'/*'
+                parcel=subdir[len(dir)+1:]
+                subdir2=subdir+'/*'
 
-            for file in glob.iglob(subdir2,recursive=True):
-                file_name=file[len(subdir)+1:]
+                for file in glob.iglob(subdir2,recursive=True):
+                    file_name=file[len(subdir)+1:]
 
-                #AAL parcellation
-                if(parcel==parcellations[0]):
-                    if(file_name=='DTI_CM.mat'):
-                        matrix_values=graph_function_calling(file) #gives (left,right,sum)
-                        aal.append(matrix_values)
-                    if (file_name == 'DTI_LEN.mat'):
-                        matrix_values = graph_function_length(file)  # gives (left,right,sum)
-                        aal_len.append(matrix_values)
+                    #AAL parcellation
+                    if(parcel==parcellations[0]):
+                        if(file_name=='DTI_CM.mat'):
+                            matrix_values=graph_function_calling(file) #gives (left,right,sum)
+                            aal.append(matrix_values)
+                        if (file_name == 'DTI_LEN.mat'):
+                            matrix_values = graph_function_length(file)  # gives (left,right,sum)
+                            aal_len.append(matrix_values)
 
-                #Harvard parcellation
-                # if (parcel == parcellations[1]):
-                #     if (file_name == 'DTI_CM.mat'):
-                #         matrix_values = graph_function_calling(file)  # gives (left,right,sum)
-                #         harvard.append(matrix_values)
-                #     if (file_name == 'DTI_LEN.mat'):
-                #         matrix_values = graph_function_length(file)  # gives (left,right,sum)
-                #         harvard_len.append(matrix_values)
-                #
-                # #Mindboggle
-                # if (parcel == parcellations[2]):
-                #     if (file_name == 'DTI_CM.mat'):
-                #         matrix_values = graph_function_calling(file)  # gives (left,right,sum)
-                #         mindboggle.append(matrix_values)
-                #     if (file_name == 'DTI_LEN.mat'):
-                #         matrix_values = graph_function_length(file)  # gives (left,right,sum)
-                #         mindboggle_len.append(matrix_values)
-                #
-                # #brainnatome
-                # if (parcel == parcellations[3]):
-                #     if (file_name == 'DTI_CM.mat'):
-                #         matrix_values = graph_function_calling(file)  # gives (left,right,sum)
-                #         brainnetome.append(matrix_values)
-                #     if (file_name == 'DTI_LEN.mat'):
-                #         matrix_values = graph_function_length(file)  # gives (left,right,sum)
-                #         brainnetome_len.append(matrix_values)
-                #
-                # #Aicha
-                # if (parcel == parcellations[4]):
-                #     if (file_name == 'DTI_CM.mat'):
-                #         matrix_values = graph_function_calling(file)  # gives (left,right,sum)
-                #         aicha.append(matrix_values)
-                #     if (file_name == 'DTI_LEN.mat'):
-                #         matrix_values = graph_function_length(file)  # gives (left,right,sum)
-                #         aicha_len.append(matrix_values)
-                #
-                # #Schaefer
-                # if (parcel == parcellations[5]):
-                #     if (file_name == 'DTI_CM.mat'):
-                #         matrix_values = graph_function_calling(file)  # gives (left,right,sum)
-                #         schaefer.append(matrix_values)
-                #     if (file_name == 'DTI_LEN.mat'):
-                #         matrix_values = graph_function_length(file)  # gives (left,right,sum)
-                #         schaefer_len.append(matrix_values)
+                    Harvard parcellation
+                    if (parcel == parcellations[1]):
+                        if (file_name == 'DTI_CM.mat'):
+                            matrix_values = graph_function_calling(file)  # gives (left,right,sum)
+                            harvard.append(matrix_values)
+                        if (file_name == 'DTI_LEN.mat'):
+                            matrix_values = graph_function_length(file)  # gives (left,right,sum)
+                            harvard_len.append(matrix_values)
+
+                    #Mindboggle
+                    if (parcel == parcellations[2]):
+                        if (file_name == 'DTI_CM.mat'):
+                            matrix_values = graph_function_calling(file)  # gives (left,right,sum)
+                            mindboggle.append(matrix_values)
+                        if (file_name == 'DTI_LEN.mat'):
+                            matrix_values = graph_function_length(file)  # gives (left,right,sum)
+                            mindboggle_len.append(matrix_values)
+
+                    #brainnatome
+                    if (parcel == parcellations[3]):
+                        if (file_name == 'DTI_CM.mat'):
+                            matrix_values = graph_function_calling(file)  # gives (left,right,sum)
+                            brainnetome.append(matrix_values)
+                        if (file_name == 'DTI_LEN.mat'):
+                            matrix_values = graph_function_length(file)  # gives (left,right,sum)
+                            brainnetome_len.append(matrix_values)
+
+                    #Aicha
+                    if (parcel == parcellations[4]):
+                        if (file_name == 'DTI_CM.mat'):
+                            matrix_values = graph_function_calling(file)  # gives (left,right,sum)
+                            aicha.append(matrix_values)
+                        if (file_name == 'DTI_LEN.mat'):
+                            matrix_values = graph_function_length(file)  # gives (left,right,sum)
+                            aicha_len.append(matrix_values)
+
+                    #Schaefer
+                    if (parcel == parcellations[5]):
+                        if (file_name == 'DTI_CM.mat'):
+                            matrix_values = graph_function_calling(file)  # gives (left,right,sum)
+                            schaefer.append(matrix_values)
+                        if (file_name == 'DTI_LEN.mat'):
+                            matrix_values = graph_function_length(file)  # gives (left,right,sum)
+                            schaefer_len.append(matrix_values)
 
 
 
-name=['aal','harvard','mindboggle','brainnetome','aicha','schaefer']
-
-graph_measures_to_file(aal,aal_len,patients,name[0])
-
-graph_measures_to_file(harvard,harvard_len,patients,name[1])
-
-graph_measures_to_file(mindboggle,mindboggle_len,patients,name[2])
-
-graph_measures_to_file(brainnetome,brainnetome_len,patients,name[3])
-
-graph_measures_to_file(aicha,aicha_len,patients,name[4])
-
-graph_measures_to_file(schaefer,schaefer_len,patients,name[5])
 
 def graph_measures_to_file(weight_lst,length_lst,patients,name):
 
@@ -119,3 +107,24 @@ def graph_measures_to_file(weight_lst,length_lst,patients,name):
     df['average_length']=length_series.values
     folder='graphValues/'
     df.to_csv(folder+name+'.csv',index=False)
+
+def run_measures():
+
+    name = ['aal', 'harvard', 'mindboggle', 'brainnetome', 'aicha', 'schaefer']
+
+    iterate()
+
+    graph_measures_to_file(aal, aal_len, patients, name[0])
+
+    graph_measures_to_file(harvard, harvard_len, patients, name[1])
+
+    graph_measures_to_file(mindboggle, mindboggle_len, patients, name[2])
+
+    graph_measures_to_file(brainnetome, brainnetome_len, patients, name[3])
+
+    graph_measures_to_file(aicha, aicha_len, patients, name[4])
+
+    graph_measures_to_file(schaefer, schaefer_len, patients, name[5])
+
+
+run_measures()
