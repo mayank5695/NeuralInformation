@@ -90,8 +90,6 @@ def get_degree(Graph):
 def get_density(graph):
     """
     The density for undirected graphs is
-
-        𝑑=2𝑚/𝑛(𝑛−1),
     The density is 0 for a graph without edges and 1 for a complete graph.
 
     :param graph: undirected weighted graph
