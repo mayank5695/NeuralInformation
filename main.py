@@ -47,6 +47,7 @@ def iterate():
                         if (file_name == 'DTI_LEN.mat'):
                             matrix_values = graph_function_length(file)  # gives (left,right,sum)
                             aal_len.append(matrix_values)
+                        print('Doing AAL')
 
                     #Harvard parcellation
                     if (parcel == parcellations[1]):
@@ -56,7 +57,7 @@ def iterate():
                         if (file_name == 'DTI_LEN.mat'):
                             matrix_values = graph_function_length(file)  # gives (left,right,sum)
                             harvard_len.append(matrix_values)
-
+                        print('Doing Harvard')
                     #Mindboggle
                     if (parcel == parcellations[2]):
                         if (file_name == 'DTI_CM.mat'):
@@ -65,7 +66,7 @@ def iterate():
                         if (file_name == 'DTI_LEN.mat'):
                             matrix_values = graph_function_length(file)  # gives (left,right,sum)
                             mindboggle_len.append(matrix_values)
-
+                        print('Doing mindboggle')
                     #brainnatome
                     if (parcel == parcellations[3]):
                         if (file_name == 'DTI_CM.mat'):
@@ -74,6 +75,7 @@ def iterate():
                         if (file_name == 'DTI_LEN.mat'):
                             matrix_values = graph_function_length(file)  # gives (left,right,sum)
                             brainnetome_len.append(matrix_values)
+                        print('Doing brainnatome')
 
                     #Aicha
                     if (parcel == parcellations[4]):
@@ -84,6 +86,7 @@ def iterate():
                             matrix_values = graph_function_length(file)  # gives (left,right,sum)
                             aicha_len.append(matrix_values)
 
+                        print('Doing Aicha')
                     #Schaefer
                     if (parcel == parcellations[5]):
                         if (file_name == 'DTI_CM.mat'):
@@ -92,6 +95,7 @@ def iterate():
                         if (file_name == 'DTI_LEN.mat'):
                             matrix_values = graph_function_length(file)  # gives (left,right,sum)
                             schaefer_len.append(matrix_values)
+                        print('Doing Schaefer')
 
 
 
@@ -111,8 +115,11 @@ def graph_measures_to_file(weight_lst,length_lst,patients,name):
 def run_measures():
 
     name = ['aal', 'harvard', 'mindboggle', 'brainnetome', 'aicha', 'schaefer']
+    print('starting iteration')
 
     iterate()
+
+    print('starting file saving')
 
     graph_measures_to_file(aal, aal_len, patients, name[0])
 

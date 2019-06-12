@@ -306,7 +306,7 @@ def graph_function_calling(adjacency_file):
     average_clustering=clustering_coefficient(graph_weight)
     fiedler_graph=fiedler_value(graph_weight)
     #smallWorldness=small_wordness_sigma(graph_weight) #takes a lot of time, computation cost high
-    smallWorldness=small_wordness_sigma(graph_weight)
+    smallWorldness=0
 
     value_lst=[degree,density,average_global_efficiency,transitivity_graph,degree_assortavity,average_clustering,fiedler_graph,smallWorldness] #please do not interchange
 
