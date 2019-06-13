@@ -48,6 +48,13 @@ def data_import(data,name):
         array[i][i]=0
 
     array=array.astype(int)
+    if(array.shape[0]==113):
+        #checking if it is harvard, then delete the rows for left and right ventricle with the stem.
+        array = np.delete(array, [96,97],0)
+        array = np.delete(array, 110, 0)
+        array = np.delete(array, [96,97], 1)
+        array = np.delete(array, 110, 1)
+
     return array
 
 
