@@ -301,21 +301,21 @@ def graph_function_calling(adjacency_file):
 
 
     #ONE VALUE FOR EACH NODE
-    degree=get_degree(graph_weight)
-    triangle_per_node = number_triangles(graph_weight)
+    #degree=get_degree(graph_weight)
+    #triangle_per_node = number_triangles(graph_weight)
 
     #ONE VALUE FOR GRAPH
 
-    density=get_density(graph_weight)
-    average_global_efficiency=global_efficiency_graph(graph_weight)
-    transitivity_graph=transitivity(graph_weight)
-    degree_assortavity=assortativity(graph_weight)
-    average_clustering=clustering_coefficient(graph_weight)
-    fiedler_graph=fiedler_value(graph_weight)
-    #smallWorldness=small_wordness_sigma(graph_weight) #takes a lot of time, computation cost high
-    smallWorldness=0
+    #density=get_density(graph_weight)
+    #average_global_efficiency=global_efficiency_graph(graph_weight)
+    #transitivity_graph=transitivity(graph_weight)
+    #degree_assortavity=assortativity(graph_weight)
+    #average_clustering=clustering_coefficient(graph_weight)
+    #fiedler_graph=fiedler_value(graph_weight)
+    smallWorldness=small_wordness_sigma(graph_weight) #takes a lot of time, computation cost high
+    #smallWorldness=0
 
-    value_lst=[degree,density,average_global_efficiency,transitivity_graph,degree_assortavity,average_clustering,fiedler_graph,smallWorldness] #please do not interchange
+    value_lst=[0,0,0,0,0,0,smallWorldness] #please do not interchange
 
     return value_lst
 

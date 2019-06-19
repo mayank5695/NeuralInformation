@@ -43,7 +43,7 @@ def iterate():
                     if(parcel==parcellations[0]):
                         if(file_name=='DTI_CM.mat'):
                             matrix_values=graph_function_calling(file) #gives (left,right,sum)
-                            outF=open("graphValues/aal.txt","a")
+                            outF=open("graphValues/aal_small.txt","a")
                             outF.write((patient + ';'))
                             for line in range(0,len(matrix_values)):
                                 lin = str(matrix_values[line])
@@ -53,17 +53,17 @@ def iterate():
                             outF.close()
                             #aal.append(matrix_values)
 
-                        if (file_name == 'DTI_LEN.mat'):
-                            matrix_values = graph_function_length(file)  # gives (left,right,sum)
-                            outF = open("graphValues/aal_len.txt", "a")
-                            outF.write((patient + ';'))
-
-                            for line in range(0,len(matrix_values)):
-                                lin = str(matrix_values[line])
-                                outF.write(lin)
-                                outF.write(';')
-                            outF.write("\n")
-                            outF.close()
+                        # if (file_name == 'DTI_LEN.mat'):
+                        #     matrix_values = graph_function_length(file)  # gives (left,right,sum)
+                        #     outF = open("graphValues/aal_len.txt", "a")
+                        #     outF.write((patient + ';'))
+                        #
+                        #     for line in range(0,len(matrix_values)):
+                        #         lin = str(matrix_values[line])
+                        #         outF.write(lin)
+                        #         outF.write(';')
+                        #     outF.write("\n")
+                        #     outF.close()
 
                         print('Doing AAL')
 
@@ -74,7 +74,7 @@ def iterate():
 
                             matrix_values = graph_function_calling(file)  # gives (left,right,sum)
                             #harvard.append(matrix_values)
-                            outF = open("graphValues/harvard.txt", "a")
+                            outF = open("graphValues/harvard_small.txt", "a")
                             outF.write((patient + ';'))
 
                             for line in range(0, len(matrix_values)):
@@ -85,19 +85,19 @@ def iterate():
                             outF.write("\n")
                             outF.close()
 
-                        if (file_name == 'DTI_LEN.mat'):
-                            matrix_values = graph_function_length(file)  # gives (left,right,sum)
-                            #harvard_len.append(matrix_values)
-                            outF = open("graphValues/harvard_len.txt", "a")
-                            outF.write((patient + ';'))
-
-                            for line in range(0, len(matrix_values)):
-                                lin = str(matrix_values[line])
-                                outF.write(lin)
-
-                                outF.write(';')
-                            outF.write("\n")
-                            outF.close()
+                        # if (file_name == 'DTI_LEN.mat'):
+                        #     matrix_values = graph_function_length(file)  # gives (left,right,sum)
+                        #     #harvard_len.append(matrix_values)
+                        #     outF = open("graphValues/harvard_len.txt", "a")
+                        #     outF.write((patient + ';'))
+                        #
+                        #     for line in range(0, len(matrix_values)):
+                        #         lin = str(matrix_values[line])
+                        #         outF.write(lin)
+                        #
+                        #         outF.write(';')
+                        #     outF.write("\n")
+                        #     outF.close()
 
                         print('Doing Harvard')
 
@@ -106,7 +106,7 @@ def iterate():
                         if (file_name == 'DTI_CM.mat'):
                             matrix_values = graph_function_calling(file)  # gives (left,right,sum)
                             #mindboggle.append(matrix_values)
-                            outF = open("graphValues/mindboggle.txt", "a")
+                            outF = open("graphValues/mindboggle_small.txt", "a")
                             outF.write((patient + ';'))
 
                             for line in range(0, len(matrix_values)):
@@ -117,19 +117,19 @@ def iterate():
                             outF.write("\n")
                             outF.close()
 
-                        if (file_name == 'DTI_LEN.mat'):
-                            matrix_values = graph_function_length(file)  # gives (left,right,sum)
-                            #mindboggle_len.append(matrix_values)
-                            outF = open("graphValues/mindboggle_len.txt", "a")
-                            outF.write((patient + ';'))
-
-                            for line in range(0, len(matrix_values)):
-                                lin = str(matrix_values[line])
-                                outF.write(lin)
-
-                                outF.write(';')
-                            outF.write("\n")
-                            outF.close()
+                        # if (file_name == 'DTI_LEN.mat'):
+                        #     matrix_values = graph_function_length(file)  # gives (left,right,sum)
+                        #     #mindboggle_len.append(matrix_values)
+                        #     outF = open("graphValues/mindboggle_len.txt", "a")
+                        #     outF.write((patient + ';'))
+                        #
+                        #     for line in range(0, len(matrix_values)):
+                        #         lin = str(matrix_values[line])
+                        #         outF.write(lin)
+                        #
+                        #         outF.write(';')
+                        #     outF.write("\n")
+                        #     outF.close()
 
                         print('Doing mindboggle')
 
@@ -138,7 +138,7 @@ def iterate():
                         if (file_name == 'DTI_CM.mat'):
                             matrix_values = graph_function_calling(file)  # gives (left,right,sum)
                             #brainnetome.append(matrix_values)
-                            outF = open("graphValues/brainnatome.txt", "a")
+                            outF = open("small/brainnatome_small.txt", "a")
                             outF.write((patient+';'))
                             for line in range(0, len(matrix_values)):
                                 lin = str(matrix_values[line])
@@ -148,77 +148,77 @@ def iterate():
                             outF.write("\n")
                             outF.close()
 
-                        if (file_name == 'DTI_LEN.mat'):
-                            matrix_values = graph_function_length(file)  # gives (left,right,sum)
-                            #brainnetome_len.append(matrix_values)
-                            outF = open("graphValues/brainnatome_len.txt", "a")
-                            outF.write((patient + ';'))
-                            for line in range(0, len(matrix_values)):
-                                lin = str(matrix_values[line])
-                                outF.write(lin)
-
-                                outF.write(';')
-                            outF.write("\n")
-                            outF.close()
+                        # if (file_name == 'DTI_LEN.mat'):
+                        #     matrix_values = graph_function_length(file)  # gives (left,right,sum)
+                        #     #brainnetome_len.append(matrix_values)
+                        #     outF = open("graphValues/brainnatome_len.txt", "a")
+                        #     outF.write((patient + ';'))
+                        #     for line in range(0, len(matrix_values)):
+                        #         lin = str(matrix_values[line])
+                        #         outF.write(lin)
+                        #
+                        #         outF.write(';')
+                        #     outF.write("\n")
+                        #     outF.close()
 
                         print('Doing brainnatome')
 
-                    #Aicha
-                    if (parcel == parcellations[4]):
-                        if (file_name == 'DTI_CM.mat'):
-                            matrix_values = graph_function_calling(file)  # gives (left,right,sum)
-                            #aicha.append(matrix_values)
-                            outF = open("graphValues/aicha.txt", "a")
-                            outF.write((patient + ';'))
-                            for line in range(0, len(matrix_values)):
-                                lin = str(matrix_values[line])
-                                outF.write(lin)
-
-                                outF.write(';')
-                            outF.write("\n")
-                            outF.close()
-
-                        if (file_name == 'DTI_LEN.mat'):
-                            matrix_values = graph_function_length(file)  # gives (left,right,sum)
-                            #aicha_len.append(matrix_values)
-                            outF = open("graphValues/aicha_len.txt", "a")
-                            outF.write((patient + ';'))
-                            for line in range(0, len(matrix_values)):
-                                lin = str(matrix_values[line])
-                                outF.write(lin)
-
-                                outF.write(';')
-                            outF.write("\n")
-                            outF.close()
-
-                        print('Doing Aicha')
+                    # #Aicha
+                    # if (parcel == parcellations[4]):
+                    #     if (file_name == 'DTI_CM.mat'):
+                    #         matrix_values = graph_function_calling(file)  # gives (left,right,sum)
+                    #         #aicha.append(matrix_values)
+                    #         outF = open("graphValues/aicha.txt", "a")
+                    #         outF.write((patient + ';'))
+                    #         for line in range(0, len(matrix_values)):
+                    #             lin = str(matrix_values[line])
+                    #             outF.write(lin)
+                    #
+                    #             outF.write(';')
+                    #         outF.write("\n")
+                    #         outF.close()
+                    #
+                    #     if (file_name == 'DTI_LEN.mat'):
+                    #         matrix_values = graph_function_length(file)  # gives (left,right,sum)
+                    #         #aicha_len.append(matrix_values)
+                    #         outF = open("graphValues/aicha_len.txt", "a")
+                    #         outF.write((patient + ';'))
+                    #         for line in range(0, len(matrix_values)):
+                    #             lin = str(matrix_values[line])
+                    #             outF.write(lin)
+                    #
+                    #             outF.write(';')
+                    #         outF.write("\n")
+                    #         outF.close()
+                    #
+                    #     print('Doing Aicha')
                     #Schaefer
-                    if (parcel == parcellations[5]):
-                        if (file_name == 'DTI_CM.mat'):
-                            matrix_values = graph_function_calling(file)  # gives (left,right,sum)
-                            #schaefer.append(matrix_values)
-                            outF = open("graphValues/schaefer.txt", "a")
-                            outF.write((patient + ';'))
-                            for line in range(0, len(matrix_values)):
-                                lin = str(matrix_values[line])
-                                outF.write(lin)
-                                outF.write(';')
-                            outF.write("\n")
-                            outF.close()
-
-                        if (file_name == 'DTI_LEN.mat'):
-                            matrix_values = graph_function_length(file)  # gives (left,right,sum)
-                            #schaefer_len.append(matrix_values)
-                            outF = open("graphValues/schaefer_len.txt", "a")
-                            outF.write((patient + ';'))
-                            for line in range(0, len(matrix_values)):
-                                lin = str(matrix_values[line])
-                                outF.write(lin)
-                                outF.write(';')
-                            outF.write("\n")
-                            outF.close()
-
-                        print('Doing Schaefer')
+                    # if (parcel == parcellations[5]):
+                    #     if (file_name == 'DTI_CM.mat'):
+                    #         matrix_values = graph_function_calling(file)  # gives (left,right,sum)
+                    #         #schaefer.append(matrix_values)
+                    #         outF = open("graphValues/schaefer.txt", "a")
+                    #         outF.write((patient + ';'))
+                    #         for line in range(0, len(matrix_values)):
+                    #             lin = str(matrix_values[line])
+                    #             outF.write(lin)
+                    #             outF.write(';')
+                    #         outF.write("\n")
+                    #         outF.close()
+                    #
+                    #     if (file_name == 'DTI_LEN.mat'):
+                    #         matrix_values = graph_function_length(file)  # gives (left,right,sum)
+                    #         #schaefer_len.append(matrix_values)
+                    #         outF = open("graphValues/schaefer_len.txt", "a")
+                    #         outF.write((patient + ';'))
+                    #         for line in range(0, len(matrix_values)):
+                    #             lin = str(matrix_values[line])
+                    #             outF.write(lin)
+                    #             outF.write(';')
+                    #         outF.write("\n")
+                    #         outF.close()
+                    #
+                    #     print('Doing Schaefer')
 
 
 
