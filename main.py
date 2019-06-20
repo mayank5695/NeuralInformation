@@ -225,7 +225,7 @@ def iterate():
 
 def graph_measures_to_file(weight_lst,length_lst,patients,name):
 
-    column_weight = ['degree', 'density', 'global_efficiency', 'transitivity', 'assortavity', 'clustering_coef',
+    column_weight = ['patient','degree', 'density', 'global_efficiency', 'transitivity', 'assortavity', 'clustering_coef',
                     'fiedler_value','small_worldness']
     patient_Series = pd.Series(patients)
     length_series=pd.Series(length_lst)
@@ -242,19 +242,4 @@ def run_measures():
 
     iterate()
 
-    # print('starting file saving')
-    #
-    # graph_measures_to_file(aal, aal_len, patients, name[0])
-    #
-    # graph_measures_to_file(harvard, harvard_len, patients, name[1])
-    #
-    # graph_measures_to_file(mindboggle, mindboggle_len, patients, name[2])
-    #
-    # graph_measures_to_file(brainnetome, brainnetome_len, patients, name[3])
-    #
-    # graph_measures_to_file(aicha, aicha_len, patients, name[4])
-    #
-    # graph_measures_to_file(schaefer, schaefer_len, patients, name[5])
-    #
 
-run_measures()

@@ -104,7 +104,7 @@
 104 Right_Putamen
 105 Left_Pallidum
 106 Right_Pallidum
-107 Left_Hippocampus
+107 Left_HippocampusC
 108 Right_Hippocampus
 109 Left_Amygdala
 110 Right_Amygdala
