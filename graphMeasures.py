@@ -216,7 +216,10 @@ def small_wordness_sigma(graph):
     :return: None
 
     """
-    return nx.algorithms.sigma(graph)
+    if (nx.is_connected(graph)):
+        return nx.algorithms.sigma(graph)
+    else:
+        return -1
 
 def degree_distribution(graph):
     """
@@ -300,18 +303,18 @@ def graph_function_calling(adjacency_file):
     graph_weight = convert_matrix_to_graph(adjacency)
 
 
-    #ONE VALUE FOR EACH NODE
-    degree=get_degree(graph_weight)
-    triangle_per_node = number_triangles(graph_weight)
-
-    #ONE VALUE FOR GRAPH
-
-    density=get_density(graph_weight)
-    average_global_efficiency=global_efficiency_graph(graph_weight)
-    transitivity_graph=transitivity(graph_weight)
-    degree_assortavity=assortativity(graph_weight)
-    average_clustering=clustering_coefficient(graph_weight)
-    fiedler_graph=fiedler_value(graph_weight)
+    # #ONE VALUE FOR EACH NODE
+    # degree=get_degree(graph_weight)
+    # triangle_per_node = number_triangles(graph_weight)
+    #
+    # #ONE VALUE FOR GRAPH
+    #
+    # density=get_density(graph_weight)
+    # average_global_efficiency=global_efficiency_graph(graph_weight)
+    # transitivity_graph=transitivity(graph_weight)
+    # degree_assortavity=assortativity(graph_weight)
+    # average_clustering=clustering_coefficient(graph_weight)
+    # fiedler_graph=fiedler_value(graph_weight)
     smallWorldness=small_wordness_sigma(graph_weight) #takes a lot of time, computation cost high
 
 
