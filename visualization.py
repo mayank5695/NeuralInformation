@@ -31,29 +31,42 @@ def create_box_plot(name):
     data_to_plot=[array[:,3],array[:,0],array[:,2],array[:,1]]
     data_mean = [np.mean(array[:, 3]), np.mean(array[:, 0]), np.mean(array[:, 2]), np.mean(array[:, 1])]
 
+
+    #do correlation
+
+    corr=np.corrcoef(data_mean,nodes)
     fig = plt.figure(1, figsize=(9, 6))
 
     # Create an axes instance
-    ax = fig.add_subplot(111)
-    ax.plot(list(range(1,5)),data_mean,'b',linewidth=1)
-    ax.legend(['mean of parcellations'])
-    # Create the boxplot
-    bp = ax.boxplot(data_to_plot,notch=True )
-    ax.set_xticklabels(parcellation)
-    ax.get_xaxis().tick_bottom()
-    ax.get_yaxis().tick_left()
-    plt.ylabel(name)
-    plt.tight_layout()
-    plt.xlabel('Parcellation scheme in order of increasing nodes')
-    if not os.path.exists(graphFolder):
-        os.mkdir(graphFolder)
-    plt.savefig(graphFolder+'/'+name+'.png',bbox_inches='tight')
-    plt.clf()
-
+    # ax = fig.add_subplot(111)
+    # ax.plot(list(range(1,5)),data_mean,'b',linewidth=1)
+    # ax.legend(['mean of parcellations'])
+    # # Create the boxplot
+    # bp = ax.boxplot(data_to_plot,notch=True )
+    # ax.set_xticklabels(parcellation)
+    # ax.get_xaxis().tick_bottom()
+    # ax.get_yaxis().tick_left()
+    # plt.ylabel(name)
+    # plt.tight_layout()
+    # plt.xlabel('Parcellation scheme in order of increasing nodes')
+    # if not os.path.exists(graphFolder):
+    #     os.mkdir(graphFolder)
+    # #plt.savefig(graphFolder+'/'+name+'.png',bbox_inches='tight')
+    #plt.clf()
+    return corr
 
 if __name__ == "__main__":
     measures = ['degree', 'density', 'global_efficiency', 'transitivity', 'assortavity',
                 'clustering_coef', 'fiedler_value']
+    lst_name=[]
+    lst=[]
     for m in measures:
-        create_box_plot(m)
+        cor=create_box_plot(m)
+        lst_name.append(m)
+        lst.append(cor)
+
+    col=['measures','correlation_array']
+    df=pd.DataFrame({col[0]:lst_name})
+    df[col[1]]=lst
+    df.to_csv('correlation.csv',index=None)
 
