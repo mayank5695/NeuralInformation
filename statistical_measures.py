@@ -5,6 +5,8 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from pingouin import ancova
 from statsmodels.stats.multicomp import pairwise_tukeyhsd,MultiComparison
+from statsmodels.stats.anova import anova_lm
+from statsmodels.formula.api import ols
 
 """"
    The ANOVA test has important assumptions that must be satisfied in order for the associated p-value to be valid.
@@ -51,7 +53,7 @@ def final_data(data):
     return final_data_parcel
 
 
-for i in range(0,len(measures)):
+for i in range(0,1):
 
     print(' ')
     print(measures[i])
@@ -60,7 +62,18 @@ for i in range(0,len(measures)):
 
     data=data.fillna(-1000)
     data_updated=final_data(data)
-    print(ancova(data=data_updated, dv='graph_values', covar='nodes', between='parcellation'))
+    #print(data_updated)
+    #array=data.values
+    formula = 'graph_values ~ nodes + parcellation'
+    lm = ols(formula, data_updated).fit()
+    print(lm.summary())
+
+    # interX_lm = ols('graph_values ~ nodes * C(parcellation)', data=data_updated).fit()
+    # print(lm.summary())
+    #
+    # table1 = anova_lm(lm, interX_lm)
+    # print(table1)
+    #print(ancova(data=data_updated, dv='graph_values', covar='nodes', between='parcellation'))
 
 
 
