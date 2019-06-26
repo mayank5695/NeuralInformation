@@ -14,6 +14,12 @@ def txt_to_dataframe(folder,name_parcellation):
     data=pd.read_csv(file_name,header=None,delimiter=';')
     data.columns=column_weight
     data=data.drop(['Null'],axis=1)
+    file_len=folder+name_parcellation+'_len.txt'
+    data_len=only_connected_patients(file_len)
+    data_len=data_len.values
+    data['length']=data_len
+    data=data[data['length']>-1.0]
+    data=data.reset_index(drop=True)
     return data
 
 def get_graph_measure_parcellation(graph_name):
@@ -37,10 +43,20 @@ def get_graph_measure_parcellation(graph_name):
     graph_data.to_csv(graphFolder+'/'+graph_name+'.csv',index=None)
 
 
+def only_connected_patients(name):
+    file_harvard=name
+    col=['patients','length','Null']
+    data1=pd.read_csv(file_harvard,header=None,delimiter=';')
+
+    data1.columns=col
+    data1 = data1.drop(['patients','Null'], axis=1)
+
+    return data1
 def create_all_measures():
     measures = ['patients', 'degree', 'density', 'global_efficiency', 'transitivity', 'assortavity',
-                     'clustering_coef','fiedler_value']
+                     'clustering_coef','fiedler_value','length']
     for measure in measures:
         get_graph_measure_parcellation(measure)
 
-def correlation():
+
+create_all_measures()
