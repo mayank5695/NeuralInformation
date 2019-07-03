@@ -58,5 +58,4 @@ def create_all_measures():
     for measure in measures:
         get_graph_measure_parcellation(measure)
 
-
-create_all_measures()
+)
