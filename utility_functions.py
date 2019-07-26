@@ -57,5 +57,3 @@ def create_all_measures():
                      'clustering_coef','fiedler_value','length']
     for measure in measures:
         get_graph_measure_parcellation(measure)
-
-)

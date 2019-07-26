@@ -15,6 +15,9 @@ import os
 measures = ['degree', 'density', 'global_efficiency', 'transitivity', 'assortavity',
                 'clustering_coef', 'fiedler_value','length']
 
+Measures = ['Degree', 'Density', 'Global efficiency', 'Transitivity', 'Assortavity',
+                'Clustering coefficient', 'Fiedler Value','Characteristic path length']
+
 parcellation_node_dict={'aal':90,'brainnatome':246,'harvard':110,'mindboggle':62}
 
 parcellation_dict={'aal':1,'brainnatome':2,'harvard':3,'mindboggle':4}
@@ -57,7 +60,7 @@ def get_annotation(x1,x2,data,value_hyp,p_val):
             txt='**'
 
 
-    if(y<1 and y>0.05):
+    if(y<1 and y>0.20):
         h = 0.007
         if(x1==0):
             y=1.1*y+one_count*(h+0.004)
@@ -67,6 +70,18 @@ def get_annotation(x1,x2,data,value_hyp,p_val):
             two_count+=1
         else:
             y=1.1*y
+
+    elif(y<=0.20 and y>0.05):
+        h = 0.009
+        if (x1 == 0):
+            y = 1.1 * y + one_count * (h + 0.009)
+            one_count += 1
+        elif (x1 == 1):
+            y = 1.1 * y + two_count * (h + 0.009)
+            two_count += 1
+        else:
+            y = 1.1 * y
+
 
     elif(y<0.05):
         h = 0.005
@@ -99,13 +114,13 @@ def get_annotation(x1,x2,data,value_hyp,p_val):
             two_count += 1
         else:
             y = 1.1 * y
-    else:
+    elif(y>40 and y<100):
         h=2
         if (x1 == 0):
-            y = 1.1 * y + one_count * (h+0.7)
+            y = 1.1 * y + one_count * (h+1.0)
             one_count += 1
         elif (x1 == 1):
-            y = 1.1 * y + two_count * (h+0.7)
+            y = 1.1 * y + two_count * (h+1.0)
             two_count += 1
         else:
             y = 1.1 * y
@@ -185,9 +200,9 @@ def statistical_measures_graph():
         lm = ols(formula, data_updated).fit()
         aov_table=sm.stats.anova_lm(lm,typ=2,robust='hc3')
 
-        # print(aov_table)
+        print(aov_table)
         # print(' ')
-        #print(lm.summary())
+        print(lm.summary())
         param=lm.params
         """
         param[0]= intercept , param[1] is coef of node, param[2] is  coef_of_parcellation
@@ -209,7 +224,7 @@ def statistical_measures_graph():
         # print(' ')
 
         means=get_data_mean(data_updated)
-        print(means)
+        #print(means)
 
 
         mod = MultiComparison(data_updated['adjusted_y'], data_updated['parcellation'])
@@ -217,7 +232,7 @@ def statistical_measures_graph():
 
         Results=mod.tukeyhsd(alpha=0.05/len(measures))
         data_tukey=pd.DataFrame(data=Results._results_table.data[1:], columns=Results._results_table.data[0])
-        print(data_tukey)
+        #print(data_tukey)
 
         x = "parcellation"
         y = "adjusted_y"
@@ -230,11 +245,13 @@ def statistical_measures_graph():
 
         ax.set_xticks([0,1,2,3])
         ax.set_xticklabels(('AAL', 'BRAINETOMME', 'HARVARD', 'MINDBOGGLE'))
-        ax.set(xlabel='PARCELLATIONS', ylabel=measures[i].upper())
+        ax.set(xlabel='PARCELLATIONS', ylabel=Measures[i].upper())
         #plt.show()
         if not os.path.exists(graphFolder):
             os.mkdir(graphFolder)
-        plt.savefig(graphFolder + measures[i] + '.png', bbox_inches='tight')
+
+        plt.savefig(graphFolder + measures[i] + '.png', bbox_inches='tight',dpi=300)
         plt.clf()
 
 statistical_measures_graph()
+
