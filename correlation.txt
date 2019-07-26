@@ -1,0 +1,232 @@
+**************
+aal
+degree
+PSQI Correlation
+[[ 1.         -0.12102796]
+ [-0.12102796  1.        ]]
+List Score correlation
+[[1.         0.01117613]
+ [0.01117613 1.        ]]
+--------------
+density
+PSQI Correlation
+[[ 1.         -0.12102796]
+ [-0.12102796  1.        ]]
+List Score correlation
+[[1.         0.01117613]
+ [0.01117613 1.        ]]
+--------------
+global_efficiency
+PSQI Correlation
+[[ 1.         -0.10479997]
+ [-0.10479997  1.        ]]
+List Score correlation
+[[ 1.         -0.03149095]
+ [-0.03149095  1.        ]]
+--------------
+transitivity
+PSQI Correlation
+[[1.         0.19528311]
+ [0.19528311 1.        ]]
+List Score correlation
+[[1.         0.47014628]
+ [0.47014628 1.        ]]
+--------------
+assortavity
+PSQI Correlation
+[[1.         0.20432685]
+ [0.20432685 1.        ]]
+List Score correlation
+[[1.         0.01651443]
+ [0.01651443 1.        ]]
+--------------
+clustering_coef
+PSQI Correlation
+[[1.         0.18099923]
+ [0.18099923 1.        ]]
+List Score correlation
+[[1.         0.22060089]
+ [0.22060089 1.        ]]
+--------------
+fiedler_value
+PSQI Correlation
+[[ 1.         -0.17325749]
+ [-0.17325749  1.        ]]
+List Score correlation
+[[ 1.         -0.11197166]
+ [-0.11197166  1.        ]]
+--------------
+**************
+brainnatome
+degree
+PSQI Correlation
+[[ 1.         -0.55131927]
+ [-0.55131927  1.        ]]
+List Score correlation
+[[ 1.         -0.07649891]
+ [-0.07649891  1.        ]]
+--------------
+density
+PSQI Correlation
+[[ 1.         -0.55131927]
+ [-0.55131927  1.        ]]
+List Score correlation
+[[ 1.         -0.07649891]
+ [-0.07649891  1.        ]]
+--------------
+global_efficiency
+PSQI Correlation
+[[ 1.         -0.55547566]
+ [-0.55547566  1.        ]]
+List Score correlation
+[[ 1.         -0.09686416]
+ [-0.09686416  1.        ]]
+--------------
+transitivity
+PSQI Correlation
+[[1.         0.33987469]
+ [0.33987469 1.        ]]
+List Score correlation
+[[1.         0.38440993]
+ [0.38440993 1.        ]]
+--------------
+assortavity
+PSQI Correlation
+[[1.         0.42312672]
+ [0.42312672 1.        ]]
+List Score correlation
+[[1.         0.12512483]
+ [0.12512483 1.        ]]
+--------------
+clustering_coef
+PSQI Correlation
+[[1.        0.3470648]
+ [0.3470648 1.       ]]
+List Score correlation
+[[1.        0.1987158]
+ [0.1987158 1.       ]]
+--------------
+fiedler_value
+PSQI Correlation
+[[1.         0.12363753]
+ [0.12363753 1.        ]]
+List Score correlation
+[[ 1.        -0.1390627]
+ [-0.1390627  1.       ]]
+--------------
+**************
+harvard
+degree
+PSQI Correlation
+[[1.         0.05968499]
+ [0.05968499 1.        ]]
+List Score correlation
+[[1.         0.03769522]
+ [0.03769522 1.        ]]
+--------------
+density
+PSQI Correlation
+[[1.         0.05968499]
+ [0.05968499 1.        ]]
+List Score correlation
+[[1.         0.03769522]
+ [0.03769522 1.        ]]
+--------------
+global_efficiency
+PSQI Correlation
+[[1.         0.06105659]
+ [0.06105659 1.        ]]
+List Score correlation
+[[1.         0.05722704]
+ [0.05722704 1.        ]]
+--------------
+transitivity
+PSQI Correlation
+[[1.         0.22615492]
+ [0.22615492 1.        ]]
+List Score correlation
+[[ 1.         -0.12784248]
+ [-0.12784248  1.        ]]
+--------------
+assortavity
+PSQI Correlation
+[[1.         0.13186941]
+ [0.13186941 1.        ]]
+List Score correlation
+[[ 1.         -0.00172831]
+ [-0.00172831  1.        ]]
+--------------
+clustering_coef
+PSQI Correlation
+[[1.         0.14685362]
+ [0.14685362 1.        ]]
+List Score correlation
+[[ 1.         -0.05910599]
+ [-0.05910599  1.        ]]
+--------------
+fiedler_value
+PSQI Correlation
+[[ 1.         -0.40768191]
+ [-0.40768191  1.        ]]
+List Score correlation
+[[ 1.         -0.00981424]
+ [-0.00981424  1.        ]]
+--------------
+**************
+mindboggle
+degree
+PSQI Correlation
+[[ 1.         -0.16490959]
+ [-0.16490959  1.        ]]
+List Score correlation
+[[1.         0.06153869]
+ [0.06153869 1.        ]]
+--------------
+density
+PSQI Correlation
+[[ 1.         -0.16490959]
+ [-0.16490959  1.        ]]
+List Score correlation
+[[1.         0.06153869]
+ [0.06153869 1.        ]]
+--------------
+global_efficiency
+PSQI Correlation
+[[ 1.        -0.1463036]
+ [-0.1463036  1.       ]]
+List Score correlation
+[[1.         0.02506659]
+ [0.02506659 1.        ]]
+--------------
+transitivity
+PSQI Correlation
+[[ 1.        -0.0707519]
+ [-0.0707519  1.       ]]
+List Score correlation
+[[1.         0.21932378]
+ [0.21932378 1.        ]]
+--------------
+assortavity
+PSQI Correlation
+[[1.         0.04496416]
+ [0.04496416 1.        ]]
+List Score correlation
+[[ 1.         -0.08370721]
+ [-0.08370721  1.        ]]
+--------------
+clustering_coef
+PSQI Correlation
+[[ 1.         -0.02894187]
+ [-0.02894187  1.        ]]
+List Score correlation
+[[1.         0.32444089]
+ [0.32444089 1.        ]]
+--------------
+fiedler_value
+PSQI Correlation
+[[ 1.         -0.04255202]
+ [-0.04255202  1.        ]]
+List Score correlation
+[[1.         0.11046976]
+ [0.11046976 1.        ]]
+--------------
